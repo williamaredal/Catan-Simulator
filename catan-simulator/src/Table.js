@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -15,29 +15,16 @@ const useStyles = makeStyles({
     },
 });
 
-function createData(simName, CardsToVictory, villages, cities, roads, devCards, longestRoad, largestArmy) {
-    return {simName, CardsToVictory, villages, cities, roads, devCards, longestRoad, largestArmy};
-}
-
-const dataRows = [
-    createData('Sim 1', 60, 4, 2, 8, 0, true, false),
-    createData('Sim 2', 40, 2, 2, 8, 6, false, true),
-    createData('Sim 3', 42, 3, 2, 8, 0, true, false),
-    createData('Sim 4', 56, 5, 4, 8, 2, true, false),
-    createData('Sim 5', 39, 3, 2, 8, 3, true, true),
-    createData('Sim 5', 39, 3, 2, 8, 3, true, true),
-    createData('Sim 5', 39, 3, 2, 8, 3, true, true),
-    createData('Sim 5', 39, 3, 2, 8, 3, true, true),
-    createData('Sim 5', 39, 3, 2, 8, 3, true, true),
-    createData('Sim 5', 39, 3, 2, 8, 3, true, true),
-    createData('Sim 5', 39, 3, 2, 8, 3, true, true),
-    createData('Sim 5', 39, 3, 2, 8, 3, true, true),
-    createData('Sim 5', 39, 3, 2, 8, 3, true, true),
-    createData('Sim 5', 39, 3, 2, 8, 3, true, true),
-  ];
+  const StyledTableRow = withStyles((theme) => ({
+    root: {
+      '&:nth-of-type(odd)': {
+        backgroundColor: theme.palette.action.hover,
+      },
+    },
+  }))(TableRow);
 
 
-export default function CustomTable() {
+export default function CustomTable({dataRows}) {
     const classes = useStyles();
 
     return (
@@ -47,6 +34,7 @@ export default function CustomTable() {
                     <TableRow>
                         <TableCell>Simulation</TableCell>
                         <TableCell align="right">CardsToVictory</TableCell>        
+                        <TableCell align="right">VictoryPoints</TableCell>        
                         <TableCell align="right">Villages</TableCell>        
                         <TableCell align="right">Cities</TableCell>        
                         <TableCell align="right">Roads</TableCell>        
@@ -56,18 +44,20 @@ export default function CustomTable() {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {dataRows.map((row) => (
-                        <TableRow key={row.simName}>
-                            <TableCell>{row.simName}</TableCell>
-                            <TableCell align="right">{row.CardsToVictory}</TableCell>
-                            <TableCell align="right">{row.villages}</TableCell>
-                            <TableCell align="right">{row.cities}</TableCell>
-                            <TableCell align="right">{row.roads}</TableCell>
-                            <TableCell align="right">{row.devCards}</TableCell>
-                            <TableCell align="right">{row.longestRoad.toString()}</TableCell>
-                            <TableCell align="right">{row.largestArmy.toString()}</TableCell>
-                        </TableRow>
+                    {Object.entries(dataRows).map( ([simKey, simValue]) => (
+                        <StyledTableRow key={simKey}>
+                            <TableCell>{simKey}</TableCell>
+                            <TableCell align="right">{simValue.cardsToVictory}</TableCell>
+                            <TableCell align="right">{simValue.victoryPoints}</TableCell>
+                            <TableCell align="right">{simValue.villages}</TableCell>
+                            <TableCell align="right">{simValue.cities}</TableCell>
+                            <TableCell align="right">{simValue.roads}</TableCell>
+                            <TableCell align="right">[{simValue.devCards.toString()}]</TableCell>
+                            <TableCell align="right">{simValue.longestRoad.toString()}</TableCell>
+                            <TableCell align="right">{simValue.largestArmy.toString()}</TableCell>
+                        </StyledTableRow>
                     ))}
+
                 </TableBody>
             </Table>
         </TableContainer>
