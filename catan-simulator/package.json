@@ -15,6 +15,7 @@
   },
   "scripts": {
     "start": "craco start",
+    "start-api": "cd src/api/ && flask run --no-debugger",
     "build": "craco build",
     "test": "craco test",
     "eject": "react-scripts eject"
@@ -42,5 +43,6 @@
     "autoprefixer": "^9.8.6",
     "postcss": "^7.0.35",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.4"
-  }
+  },
+  "proxy": "http://localhost:5000"
 }

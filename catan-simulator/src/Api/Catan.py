@@ -2,7 +2,6 @@ from collections import Counter
 from random import choice
 
 import numpy as np
-import operator
 
 # Figuring out the roads to victory requiring the minimum number of cards to achieve victory in catan
 
@@ -105,7 +104,8 @@ def PlayerScore(player, ledger):
         (player.villages * ledger.villageSettlement) +
         (player.cities * ledger.citySettlement) +
         (player.longestRoad * ledger.longestRoad['points']) + 
-        (player.largestArmy * ledger.largestArmy['points'])
+        (player.largestArmy * ledger.largestArmy['points']) + 
+        (player.devCards.count('v'))
     )
     return playerScore
 
@@ -162,7 +162,7 @@ def BuyDevCard(player, ledger):
     )
 
 
-
+# think this is acting buggy, not ticking longest road on random occations
 def SetSpecialCard(player, ledger):
     if (player.roads - (ledger.startRoads / ledger.startVillages)) >= (ledger.longestRoad['requirement']) and player.longestRoad == False:
         player.updateSpecialCard(True, player.longestRoad)
@@ -176,7 +176,7 @@ def SetSpecialCard(player, ledger):
 
 
 def SimulateCatanGames(numberOfSimulations, simulatedGames={}):
-    for s in range(numberOfSimulations):
+    for s in range(1, numberOfSimulations + 1):
         
         p1DecisionTree = []
         p1 = Player(
@@ -264,9 +264,4 @@ def SimulateCatanGames(numberOfSimulations, simulatedGames={}):
             }
 
 
-
-
-    sorted_tuples = sorted(simulatedGames.items(), key=lambda x: operator.getitem(x[1], 'cardsToVictory'))
-    orderedSimulations = dict(s for s in sorted_tuples)
-
-    return orderedSimulations
+    return simulatedGames
