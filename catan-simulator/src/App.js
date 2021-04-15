@@ -1,6 +1,8 @@
 import CustomTable from './Table';
 import React from 'react';
 import { useState, useEffect } from 'react'
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 
 function App() {
   
@@ -9,19 +11,17 @@ function App() {
   
   useEffect(() => {
     fetch('/simulate').then(response => response.json()).then(data => {
-
-      updateSimulationList(data)
-      setLoadingState(0)
+      updateSimulationList(data);
+      setLoadingState(0);
     });
   }, []);
 
 
   return (
-    <div>
-      <div className="bg-gray-800 flex p-2 m-6 rounded-lg  h-screen">
+    <div className="bg-blue-400 flex">
+      <div className="bg-gray-600 flex p-3 mt-12 mx-auto rounded-lg w-5/6 h-screen">
         {
-        loadingState ?
-        <p>Loading simulations</p> : 
+        loadingState ? <CircularProgress class="absolute inset-x-0 w-3/4 mx-auto"/> : 
         <CustomTable dataRows={simulationList}/>
         }
       </div>

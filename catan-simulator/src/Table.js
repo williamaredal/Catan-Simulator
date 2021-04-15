@@ -1,5 +1,4 @@
 import React from 'react';
-import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -7,6 +6,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import { withStyles, makeStyles } from '@material-ui/core/styles';
 
 
 const useStyles = makeStyles({
@@ -26,10 +26,11 @@ const useStyles = makeStyles({
 
 export default function CustomTable({dataRows}) {
     const classes = useStyles();
-
+    
     return (
         <TableContainer component={Paper}>
             <Table className={classes.table} stickyHeader>
+
                 <TableHead>
                     <TableRow>
                         <TableCell>Simulation</TableCell>
@@ -43,7 +44,7 @@ export default function CustomTable({dataRows}) {
                         <TableCell align="right">LargestArmy</TableCell>        
                     </TableRow>
                 </TableHead>
-                <TableBody>
+                  <TableBody>
                     {Object.entries(dataRows).map( ([simKey, simValue]) => (
                         <StyledTableRow key={simKey}>
                             <TableCell>{simKey}</TableCell>
@@ -57,8 +58,8 @@ export default function CustomTable({dataRows}) {
                             <TableCell align="right">{simValue.largestArmy.toString()}</TableCell>
                         </StyledTableRow>
                     ))}
-
                 </TableBody>
+
             </Table>
         </TableContainer>
     );
