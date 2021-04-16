@@ -15,13 +15,21 @@ const useStyles = makeStyles({
     },
 });
 
-  const StyledTableRow = withStyles((theme) => ({
-    root: {
-      '&:nth-of-type(odd)': {
-        backgroundColor: theme.palette.action.hover,
-      },
+const StyledTableCell = withStyles((theme) => ({
+  head: {
+    backgroundColor: theme.palette.common.black,
+    color: theme.palette.common.white,
+  },
+}))(TableCell);
+
+
+const StyledTableRow = withStyles((theme) => ({
+  root: {
+    '&:nth-of-type(odd)': {
+      backgroundColor: theme.palette.action.hover,
     },
-  }))(TableRow);
+  },
+}))(TableRow);
 
 
 export default function CustomTable({dataRows}) {
@@ -33,15 +41,15 @@ export default function CustomTable({dataRows}) {
 
                 <TableHead>
                     <TableRow>
-                        <TableCell>Simulation</TableCell>
-                        <TableCell align="right">CardsToVictory</TableCell>        
-                        <TableCell align="right">VictoryPoints</TableCell>        
-                        <TableCell align="right">Villages</TableCell>        
-                        <TableCell align="right">Cities</TableCell>        
-                        <TableCell align="right">Roads</TableCell>        
-                        <TableCell align="right">DevCards</TableCell>        
-                        <TableCell align="right">LongestRoad</TableCell>        
-                        <TableCell align="right">LargestArmy</TableCell>        
+                      <StyledTableCell>Simulation</StyledTableCell>
+                      <StyledTableCell align="right">CardsToVictory</StyledTableCell>        
+                      <StyledTableCell align="right">VictoryPoints</StyledTableCell>        
+                      <StyledTableCell align="right">Villages</StyledTableCell>        
+                      <StyledTableCell align="right">Cities</StyledTableCell>        
+                      <StyledTableCell align="right">Roads</StyledTableCell>        
+                      <StyledTableCell align="right">DevCards</StyledTableCell>        
+                      <StyledTableCell align="right">LongestRoad</StyledTableCell>        
+                      <StyledTableCell align="right">LargestArmy</StyledTableCell>        
                     </TableRow>
                 </TableHead>
                   <TableBody>
