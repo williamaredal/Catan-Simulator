@@ -2,7 +2,7 @@ import React from 'react';
 import TableContainer from '@material-ui/core/TableContainer';
 import Paper from '@material-ui/core/Paper';
 import { Table, Column } from 'react-virtualized';
-import 'react-virtualized/styles.css'
+import './customStyles.css'
 
 
 export default function VirtualizedTable({dataRows}) {
@@ -10,7 +10,7 @@ export default function VirtualizedTable({dataRows}) {
     return (
         <TableContainer component={Paper}>
             <Table
-            width={1240}
+            width={1242}
             height={690}
             headerHeight={40}
             rowHeight={40}
