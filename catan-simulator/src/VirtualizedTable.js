@@ -1,11 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import TableContainer from '@material-ui/core/TableContainer';
 import Paper from '@material-ui/core/Paper';
 import { Table, Column } from 'react-virtualized';
 import './customStyles.css'
-
+import ModalCard from './ModalCard';
 
 export default function VirtualizedTable({dataRows}) {
+
+    const [modalState, setModal] = useState(false);
+    const [modalData, setModalData] = useState(0);
+
+    const openCard = (index) => {
+        setModalData(dataRows[index])
+        setModal(true)
+    }
+
+    const closeCard = () => {
+        setModal(false)
+    }
+
 
     return (
         <TableContainer component={Paper}>
@@ -16,7 +29,7 @@ export default function VirtualizedTable({dataRows}) {
             rowHeight={40}
             rowCount={dataRows.length}
             rowGetter={({index}) => dataRows[index]}
-            onRowClick={(row) => {console.log(row.index)}}
+            onRowClick={(row) => openCard(row.index)}
             >
                 <Column width={135} label="Simulation" dataKey="simulation"/>
                 <Column width={135} label="victoryPoints" dataKey="victoryPoints"/>
@@ -29,6 +42,9 @@ export default function VirtualizedTable({dataRows}) {
                 <Column width={135} label="largestArmy" dataKey="largestArmy"/>
 
             </Table>
+            {
+                modalState && <ModalCard openState={modalState} closeState={closeCard} cardData={modalData}/>
+            }
         </TableContainer>
     );
 }
