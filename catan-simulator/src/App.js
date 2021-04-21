@@ -1,5 +1,5 @@
-import CustomTable from './Table';
 import VirtualizedTable from './VirtualizedTable';
+import Form from './Form';
 import React from 'react';
 import { useState, useEffect,  } from 'react'
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -42,11 +42,11 @@ function App() {
 
   return (
     <div className="bg-blue-400 flex">
-      <div className="bg-gray-600 flex p-3 mt-12 mx-auto rounded-lg w-5/6 h-screen">
+      <Form />
+      <div className="bg-gray-600 p-3 mt-32 mx-auto static rounded-lg w-5/6 h-screen">
         {
         loadingState ? <CircularProgress className="absolute inset-x-0 w-3/4 mx-auto"/> : 
         <VirtualizedTable dataRows={virtualizedFormatedSimulationList} />
-        //<CustomTable dataRows={simulationList}/>
         }
       </div>
     </div>
