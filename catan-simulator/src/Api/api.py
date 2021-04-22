@@ -1,12 +1,13 @@
-import time
 from flask import Flask
+from flask import request
 from Catan import *
 
 
 app = Flask(__name__)
 
 
-@app.route('/simulate')
-def get_current_time():
-    simulations = SimulateCatanGames(100)
+@app.route('/simulate', methods=['POST'])
+def returnSimulations():
+    simulationN = int(request.data.decode('UTF-8'))
+    simulations = SimulateCatanGames(simulationN, simulatedGames={})
     return simulations

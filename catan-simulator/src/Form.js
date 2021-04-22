@@ -1,24 +1,28 @@
 import React, { useState } from 'react';
 import './form.css';
 
-export default function Form () {
+export default function Form ({submitData}) {
     const [inputValue, setInput] = useState(0);
     
     function updateInput (event) {
-        // logic for validating input value being valid integer
         setInput(event.target.value)
-        console.log(event.target.value)
     }
 
-    function startSimulation () {
-        // logic for validating input value being valid integer
-        console.log('simulate', inputValue)
+    function validateData () {
+        if ((inputValue % 1 === 0) && (inputValue > 0) && (inputValue < 100000000)) {
+            submitData(Number(inputValue));
+        }
+        
+        else {
+            alert('Enter a valid number 1 - 100.000.000')
+        }
     }
 
+    
     return (
         <div class="inputForm">
-            <input onChange={(event) => updateInput(event)} placeholder="N Catan simulations" className="rounded-l-xl p-3" />
-            <button type="integer" onClick={startSimulation} className="rounded-r-xl p-3 bg-black text-white">Simulate</button>
+            <input type="number" onChange={(event) => updateInput(event)} placeholder="N Catan simulations" className="rounded-l-xl p-3" />
+            <button onClick={validateData} className="rounded-r-xl p-3 bg-black text-white">Simulate</button>
         </div>
     )
 }
