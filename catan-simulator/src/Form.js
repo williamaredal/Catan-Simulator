@@ -20,7 +20,7 @@ export default function Form ({submitData}) {
 
     
     return (
-        <div class="inputForm">
+        <div className="inputForm">
             <input type="number" onChange={(event) => updateInput(event)} placeholder="N Catan simulations" className="rounded-l-xl p-3" />
             <button onClick={validateData} className="rounded-r-xl p-3 bg-black text-white">Simulate</button>
         </div>

@@ -11,7 +11,7 @@ export default function ModalCard({cardData, openState, closeState}) {
             open={openState}
             onClose={closeState}
         >
-            <Paper class="modal">
+            <Paper className="modal">
                 <div>
                     <h1 className="rounded-md mx-4 my-10 p-2 bg-gray-300">Simulation: {cardData.simulation}</h1>
                     <div className="grid grid-cols-2">
@@ -24,13 +24,24 @@ export default function ModalCard({cardData, openState, closeState}) {
 
                         <div>
                             <h1 className="rounded-md mx-4 my-4 p-2 bg-gray-300">Roads: {cardData.roads}</h1>
-                            <h1 className="rounded-md mx-4 my-4 p-2 bg-gray-300">DevelopmentCards: {cardData.devCards}</h1>
+                            <h1 className="rounded-md mx-4 my-4 p-2 bg-gray-300">DevelopmentCards: {cardData.devCards.toString()}</h1>
                             <h1 className="rounded-md mx-4 my-4 p-2 bg-gray-300">LongestRoad: {cardData.longestRoad.toString()}</h1>
                             <h1 className="rounded-md mx-4 my-4 p-2 bg-gray-300">LargestArmy: {cardData.largestArmy.toString()}</h1>
                         </div>
                     </div>
                     <div>
-                        <h1 className="rounded-md mx-4 my-4 p-2 bg-gray-300">SpentResources: {Object.entries(cardData.spentResources).map( (resource) => (<span>{resource[0]}{':'} {resource[1]}{', '}</span>) )}</h1>
+                        <h1 className="rounded-md mx-4 my-4 p-2 bg-gray-300">SpentResources: {Object.entries(cardData.spentResources).map( (resource, i) => {
+                            if (Object.entries(cardData.spentResources).length === i + 1) {
+                                return (
+                                    <span key={String(resource[0] + i)}>{resource[0]}{':'} {resource[1]}</span>
+                                );
+                            }
+                            else {
+                                return (
+                                    <span key={String(resource[0] + i)}>{resource[0]}{':'} {resource[1]}{', '}</span>
+                                );
+                        } 
+                            } )}</h1>
                         <h1 className="rounded-md mx-4 my-4 p-2 bg-gray-300">DecisionTree: {cardData.decisionTree.toString()}</h1>
                     </div>
                 </div>
