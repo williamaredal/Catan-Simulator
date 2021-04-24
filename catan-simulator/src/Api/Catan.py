@@ -196,14 +196,11 @@ def BuyDevCard(player, ledger):
     )
 
 
-# think this is acting buggy, not ticking longest road on random occations
 def SetSpecialCard(player, ledger):
-    if (player.roads - (ledger.startRoads / ledger.startVillages)) >= (ledger.longestRoad['requirement']) and player.longestRoad == False:
-        player.updateSpecialCard(True, player.longestRoad)
-    if len(player.devCards) != 0 and player.devCards.count('k') >= (ledger.largestArmy['requirement']) and player.largestArmy == False:
-        player.updateSpecialCard(player.largestArmy, True)
-    else:
-        return None
+    player.updateSpecialCard(
+        ((player.roads - (ledger.startRoads)) >= (ledger.longestRoad['requirement'])),
+        (len(player.devCards) != 0 and player.devCards.count('k') >= (ledger.largestArmy['requirement']))
+    )
 
 
 
@@ -216,11 +213,11 @@ def SimulateCatanGames(numberOfSimulations, simulatedGames={}, GameLedger=Ledger
         p1 = Player(
             GameLedger.initialResourceUsage,
             GameLedger.startVillages,
-            GameLedger.maxVillages,
+            (GameLedger.maxVillages - GameLedger.startVillages),
             GameLedger.startCities,
-            GameLedger.maxCities,
+            (GameLedger.maxCities - GameLedger.startCities),
             GameLedger.startRoads,
-            GameLedger.maxRoads,
+            (GameLedger.maxRoads - GameLedger.startRoads),
             GameLedger.startDevCards,
             ['k' for n in range(14)] + ['v' for n in range(5)] + ['i' for n in range(6)]
             )
@@ -229,9 +226,9 @@ def SimulateCatanGames(numberOfSimulations, simulatedGames={}, GameLedger=Ledger
         while VictoryCondition(p1, GameLedger) == False:
 
             possibleChoices = [c for c in range(1,4) if
-                c == 1 and p1.availableVillages > 0 and p1.availableRoads >= GameLedger.villageSpacingRequirement
-                or c == 2 and p1.availableCities > 0 and p1.villages > 0
-                or c == 3 and len(p1.availableDevCards) > 0
+                (c == 1) and (p1.availableVillages > 0) and (p1.availableRoads >= GameLedger.villageSpacingRequirement)
+                or (c == 2) and (p1.availableCities > 0) and( p1.villages > 0)
+                or (c == 3) and (len(p1.availableDevCards) > 0)
                 ]
             randomDecision = choice(possibleChoices)
             SetSpecialCard(p1, GameLedger)
@@ -240,7 +237,7 @@ def SimulateCatanGames(numberOfSimulations, simulatedGames={}, GameLedger=Ledger
             # VILLAGE
             if randomDecision == 1:
                 # VILLAGE AFTER BUILDING 1 ROAD
-                if p1.roads > GameLedger.villageSpacingRequirement and p1.roads <= (GameLedger.villageSpacingRequirement * GameLedger.startVillages):
+                if (p1.roads >= GameLedger.villageSpacingRequirement) and (p1.roads < (GameLedger.villageSpacingRequirement * GameLedger.startVillages)):
                     BuildRoad(p1, GameLedger)
                     BuildVillage(p1, GameLedger)
             
@@ -277,6 +274,8 @@ def SimulateCatanGames(numberOfSimulations, simulatedGames={}, GameLedger=Ledger
                 else:
                     print('Unexpected error...')
                 break
+
+            SetSpecialCard(p1, GameLedger)
 
         simulatedGames[s] = {
             'decisionTree' : p1DecisionTree,
