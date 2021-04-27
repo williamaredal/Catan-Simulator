@@ -3,6 +3,11 @@ import Modal from '@material-ui/core/Modal';
 import Paper from '@material-ui/core/Paper';
 import './modal.css';
 
+const decisionVocabulary = {
+    "1": "village",
+    "2": "city",
+    "3": "devCard",
+}
 
 export default function ModalCard({cardData, openState, closeState}) {
 
@@ -42,7 +47,18 @@ export default function ModalCard({cardData, openState, closeState}) {
                                 );
                         } 
                             } )}</h1>
-                        <h1 className="rounded-md mx-4 my-4 p-2 bg-gray-300">DecisionTree: {cardData.decisionTree.toString()}</h1>
+                        <h1 className="rounded-md mx-4 my-4 p-2 bg-gray-300">DecisionTree: {cardData.decisionTree.map( (decision, i) => {
+                            if (cardData.decisionTree.length === i + 1) {
+                                return (
+                                    <span key={String(i)}> {decisionVocabulary[String(decision)]} </span>
+                                )
+                            }
+                            else {
+                                return (
+                                    <span key={String(i)}> {decisionVocabulary[String(decision)]}{', '} </span>
+                                )
+                            }
+                        })}</h1>
                     </div>
                 </div>
 
