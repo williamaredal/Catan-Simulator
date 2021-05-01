@@ -3,7 +3,7 @@ import Form from './Form';
 import React from 'react';
 import { useState } from 'react'
 import CircularProgress from '@material-ui/core/CircularProgress';
-import "tailwindcss/tailwind.css"
+import "tailwindcss/tailwind.css";
 
 
 function App() {
