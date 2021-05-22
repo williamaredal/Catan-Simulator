@@ -24,10 +24,10 @@ To find out more about any of the simulations simply click on it's row to view a
 Information and stats available for viewing are:
 `victoryPoints`, `cardsToVictory`, `spentResources`, `villages`, `cities`, `roads`, `devCards`, `decisionTree`, `longestRoad` and `largestArmy`. Most are self-explanatory, while others aren't.
 
-`cardsToVictory` refers to the number of resource cards spent to achieve victory in the simulation.
-`spentResources` refers to the number and types of resources spent during the simulation.
-`devCards` represents all development cards bought during the simulation.
-`decisionTree` is the linear history of choices logged.
+`cardsToVictory` refers to the number of resource cards spent to achieve victory in the simulation. \n
+`spentResources` refers to the number and types of resources spent during the simulation.\n
+`devCards` represents all development cards bought during the simulation.\n
+`decisionTree` is the linear history of choices logged.\n
 
 The virtualized table also supports column sorting in ascending and descending order. So you can run a large set of simulations and sort them to find strategies that focusing on or ignore certain aspects of Catan.
 The column 'cardsToVictory' can also be sorted to find different strategies requiring the most cards to win, for those interested in loosing in the funniest way, or the strategies requiring the fewest number of cards to win. 
