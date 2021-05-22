@@ -26,7 +26,7 @@ Information and stats available for viewing are:
 
 `cardsToVictory` refers to the number of resource cards spent to achieve victory in the simulation.
 `spentResources` refers to the number and types of resources spent during the simulation.
-`devCards` represents cards drawn during the simulation.
+`devCards` represents all development cards bought during the simulation.
 `decisionTree` is the linear history of choices logged.
 
 The virtualized table also supports column sorting in ascending and descending order. So you can run a large set of simulations and sort them to find strategies that focusing on or ignore certain aspects of Catan.
