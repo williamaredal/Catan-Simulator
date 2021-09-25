@@ -45,7 +45,7 @@ function App() {
 
 
   return (
-    <div className="bg-blue-400 flex md:h-full">
+    <div className="bg-blue-400 flex min-h-screen ">
       <Form submitData={startSimulation}/>
       { (idleScreen) ?
         <div className=" mt-32 mx-auto relative w-2/3 mb-8">
