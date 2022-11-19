@@ -24,5 +24,8 @@ yarn-debug.log*
 yarn-error.log*
 
 # api
-venv
+Include
+
+Lib
+Scripts
 __pycache__
